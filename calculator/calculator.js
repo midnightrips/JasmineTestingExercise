@@ -1,8 +1,8 @@
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById("calc-form");
   if (form) {
     setupIntialValues();
-    form.addEventListener("submit", function(e) {
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
       update();
     });
@@ -21,7 +21,7 @@ function getCurrentUIValues() {
 // Put some default values in the inputs
 // Call a function to calculate the current monthly payment
 function setupIntialValues() {
-  const values = {amount: 10000, years: 10, rate: 4.5};
+  const values = { amount: 10000, years: 10, rate: 4.5 };
 
   const amountUI = document.getElementById("loan-amount");
   amountUI.value = values.amount;
@@ -46,9 +46,9 @@ function update() {
 // calculate the monthly payment.  The output should be a string
 // that always has 2 decimal places.
 function calculateMonthlyPayment(values) {
-  const yearlyRate = (values.rate / 100) / 12;
+  const monthlyRate = (values.rate / 100) / 12;
   const numOfPayments = Math.floor(values.years * 12);
-  return (yearlyRate * values.amount) / (1 - ((1 + yearlyRate) ** numOfPayments));
+  return (monthlyRate * values.amount) / (1 - Math.pow((1 + monthlyRate), -numOfPayments)).toFixed(2);
 }
 
 // Given a string representing the monthly payment value,
